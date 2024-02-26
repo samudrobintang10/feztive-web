@@ -1,6 +1,11 @@
 import { Outlet } from "react-router-dom";
+
+// Imported Png or Svg
 import FeztiveMiniLogoSvg from "../assets/festive-mini.svg";
+
+// Imported Components
 import Button from "../elements/Button";
+import NavTab from "../elements/NavTab";
 
 function DefaultLayout() {
   return (
@@ -14,10 +19,10 @@ function DefaultLayout() {
             </h2>
           </div>
           <div className="flex gap-8 items-center">
-            <h5 className="font-bold text-primary-light-orange">Home</h5>
-            <h5 className="font-medium">About</h5>
-            <h5 className="font-medium">Event</h5>
-            <h5 className="font-medium">Merchandise</h5>
+            <NavTab placeholder="Home" href={"/"} />
+            <NavTab placeholder="About" href={"/about"} />
+            <NavTab placeholder="Event" href={"/event"} isComingSoon/>
+            <NavTab placeholder="Merchandise" href={"/merchandise"} />
             <Button placeholder="Login" isSmall isSecondary />
           </div>
         </header>

@@ -1,6 +1,9 @@
 function Home() {
-    return <div><h1 className=" text">Mantap</h1></div>;
-  }
-  
-  export default Home;
-  
+  return (
+    <div>
+      <h1 className="">Home</h1>
+    </div>
+  );
+}
+
+export default Home;

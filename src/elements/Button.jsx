@@ -5,11 +5,12 @@ import { Link } from "react-router-dom";
 // There are two types of button type: isPrimary (Default) and isSecondary
 // There are x types of color: isMusicJazz (Default) etc
 
-function Button(props) {
+function Button({ href, placeholder, isSecondary, isPurple, isSmall, isBig }) {
   const canvas = ["rounded"];
   const brush = [];
 
-  if (props.isSmall) {
+  // Button size
+  if (isSmall) {
     canvas.push("py-2 px-[22px]");
   } else if (isBig) {
     canvas.push();
@@ -18,15 +19,16 @@ function Button(props) {
     canvas.push("py-4 px-8 ");
   }
 
-  if (props.isSecondary) {
+  // Button type with extended on color
+  if (isSecondary) {
     brush.push("outline outline-1");
-    if (props.isPurple) {
+    if (isPurple) {
       brush.push("outline-primary-purple text-primary-purple");
     } else {
       brush.push("outline-primary-music-jazz text-primary-music-jazz");
     }
   } else {
-    if (props.isPurple) {
+    if (isPurple) {
       brush.push("bg-primary-purple text-primary-white");
     } else {
       brush.push("bg-primary-music-jazz text-primary-white");
@@ -34,9 +36,9 @@ function Button(props) {
   }
 
   return (
-    <Link to={props.href}>
+    <Link to={href}>
       <button className={canvas.join(" ").concat(" ", brush.join(" "))}>
-        <h5>{props.placeholder}</h5>
+        <h5>{placeholder}</h5>
       </button>
     </Link>
   );
