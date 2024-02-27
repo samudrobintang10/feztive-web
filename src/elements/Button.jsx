@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 function Button({ href, placeholder, isSecondary, isPurple, isSmall, isBig }) {
   const canvas = ["rounded"];
   const brush = [];
+  const font = [];
 
   // Button size
   if (isSmall) {
@@ -16,7 +17,8 @@ function Button({ href, placeholder, isSecondary, isPurple, isSmall, isBig }) {
     canvas.push();
     // implement on further progress
   } else {
-    canvas.push("py-4 px-8 ");
+    canvas.push("py-4 px-8");
+    font.push("text-lg")
   }
 
   // Button type with extended on color
@@ -38,7 +40,7 @@ function Button({ href, placeholder, isSecondary, isPurple, isSmall, isBig }) {
   return (
     <Link to={href}>
       <button className={canvas.join(" ").concat(" ", brush.join(" "))}>
-        <h5>{placeholder}</h5>
+        <h5 className={font.join(" ")}>{placeholder}</h5>
       </button>
     </Link>
   );
