@@ -11,6 +11,10 @@ export default {
         "primary-white": "#FFFFFF",
         "primary-light-orange": "#FFA674",
         "primary-music-jazz": "#FF3D00",
+        "primary-blue": "#0066FF",
+        "secondary-blue": "#74BCFF",
+        "secondary-grey": "#DCDCDC",
+        "tertiary-grey": "#AAAEBD"
       },
       fontFamily: {
         monserrat: ["Montserrat"],
