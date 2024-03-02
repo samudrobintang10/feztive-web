@@ -6,7 +6,7 @@
 @tailwind components;
 @tailwind utilities;
 
-#defaultLayout {
+#defaultLayout > header, main {
   @apply xl:max-w-screen-xl mx-auto w-full md:px-20 sm:px-12 px-6;
 }
 

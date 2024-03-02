@@ -2,21 +2,25 @@ import Button from "../elements/Button";
 import MerchandiseMenuCard from "../elements/MerchandiseMenuCard";
 import MerchandiseCard from "../elements/MerchandiseCard";
 
+// Imported Library
+import { faArrowRight, faAngleRight } from "@fortawesome/free-solid-svg-icons";
+
 // Imported Png or Svg
 import HeroPng from "../assets/images/hero.png";
 import ExampleImagePng from "../assets/images/example-image.png";
+import BannerAboutPng from "../assets/images/banner-about.png";
 import TwoPeopleIconSvg from "../assets/svg/two-people-icon.svg";
 import CheckIconSvg from "../assets/svg/check-icon.svg";
 import RocketIconSvg from "../assets/svg/rocket-icon.svg";
 import StarIconSvg from "../assets/svg/star-icon.svg";
-import ClockIconSvg from "../assets/svg/clock-icon.svg"
+import ClockIconSvg from "../assets/svg/clock-icon.svg";
 
 function Home() {
   return (
     <div className="home">
       <section className="hero">
         <div className="py-24 flex justify-between gap-32">
-          <div className="hero-images w-1/2 relative">
+          <div className="hero-images w-6/12 relative">
             <img
               src={HeroPng}
               alt="hero.png"
@@ -54,7 +58,7 @@ function Home() {
               </div>
             </div>
           </div>
-          <div className="hero-narative w-1/2 relative">
+          <div className="hero-narative w-6/12 relative">
             <h1 className="font-inter font-bold text-6xl leading-tight pb-3">
               The Best Place Where find The needs of Music
             </h1>
@@ -130,7 +134,36 @@ function Home() {
           </div>
         </div>
       </section>
-      <h1 className="">Home</h1>
+      <section className="get-to-know">
+        <div className="get-to-know-images py-24 flex justify-between gap-20">
+          <div className="hero-images w-6/12 relative px-8">
+            <img
+              src={BannerAboutPng}
+              alt="banner-about.png"
+              className="w-full"
+            />
+          </div>
+          <div className="get-to-know-narative w-6/12 grid">
+            <div className="pt-12">
+              <h1 className="font-inter font-bold text-3xl pb-3">
+                Get to know More About Feztive
+              </h1>
+              <h5 className="font-inter leading-7 pb-10 text-gray-500">
+                Feztive is a startup that focuses on developing a platform to
+                support music industry enthusiasts in managing events and
+                merchandise sales. With Feztive's integrated solutions,
+                customers can easily organize and manage events and sell
+                merchandise, allowing them to focus more on creative aspects
+                such as planning concerts or producing artwork for merchandise.
+                Through their efforts and innovation, Festive is committed to
+                delivering the best experience for music enthusiasts and the
+                creative industry as a whole.
+              </h5>
+              <Button placeholder="ABOUT US" isBig isOrange icon={faAngleRight} />
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
