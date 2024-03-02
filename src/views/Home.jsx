@@ -155,11 +155,16 @@ function Home() {
                 customers can easily organize and manage events and sell
                 merchandise, allowing them to focus more on creative aspects
                 such as planning concerts or producing artwork for merchandise.
-                Through their efforts and innovation, Festive is committed to
+                Through their efforts and innovation, Feztive is committed to
                 delivering the best experience for music enthusiasts and the
                 creative industry as a whole.
               </h5>
-              <Button placeholder="ABOUT US" isBig isOrange icon={faAngleRight} />
+              <Button
+                placeholder="ABOUT US"
+                isBig
+                isOrange
+                icon={faAngleRight}
+              />
             </div>
           </div>
         </div>

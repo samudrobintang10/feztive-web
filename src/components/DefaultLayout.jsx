@@ -1,7 +1,8 @@
 import { Outlet } from "react-router-dom";
 
 // Imported Png or Svg
-import FeztiveMiniLogoSvg from "../assets/svg/festive-mini.svg";
+import FeztiveMiniLogoSvg from "../assets/svg/feztive-mini.svg";
+import FeztiveWhiteIconSvg from "../assets/svg/feztive-white-icon.svg";
 
 // Imported Components
 import Button from "../elements/Button";
@@ -32,14 +33,27 @@ function DefaultLayout() {
       <footer>
         <div className="w-full bg-gradient-to-r from-primary-music-jazz to-primary-light-orange px-16 pb-5 pt-8 grid grid-cols-2 gap-y-16">
           <div className="grid grid-cols-4 gap-x-12">
-            <div className="address col-span-2">
-              <h3 className=" font-inter font-semibold text-primary-white pb-4">
-                Address:
-              </h3>
-              <h4 className="font-inter text-primary-white">
-                Jalan Sisingamangaraja No 18, Pulogadung Jakarta Selatan, DKI
-                Jakarat
-              </h4>
+            <div className="address col-span-2 grid gap-y-4">
+              <div className="flex gap-x-2 items-center">
+                <img
+                  src={FeztiveWhiteIconSvg}
+                  alt="feztive-white-icon.svg"
+                  width={60}
+                  height={52}
+                />
+                <h2 className="text-primary-white text-5xl font-semibold">
+                  Feztive
+                </h2>
+              </div>
+              <div className="address-detail">
+                <h3 className=" font-inter font-semibold text-primary-white pb-4">
+                  Address:
+                </h3>
+                <h4 className="font-inter text-primary-white">
+                  Jalan Sisingamangaraja No 18, Pulogadung Jakarta Selatan, DKI
+                  Jakarat
+                </h4>
+              </div>
             </div>
             <div className="our-product-menu">
               <h3 className=" font-inter text-primary-white pb-7">
@@ -76,9 +90,7 @@ function DefaultLayout() {
             </div>
           </div>
           <div className="col-span-2 flex justify-center">
-            <h3 className="text-primary-white">
-              @Copyright 2023
-            </h3>
+            <h3 className="text-primary-white">@Copyright 2023</h3>
           </div>
         </div>
       </footer>
