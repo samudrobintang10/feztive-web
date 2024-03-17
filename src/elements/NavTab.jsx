@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 
-function NavTab({ placeholder, href, isComingSoon }) {
+function NavTab({ placeholder, href, isComingSoon, onClick, isSecondary }) {
   const canvas = [];
 
   // Knowing the location of the url
@@ -8,13 +8,27 @@ function NavTab({ placeholder, href, isComingSoon }) {
 
   if (location.pathname === href) {
     canvas.push("font-bold");
-    canvas.push("text-primary-orange");
+    if (isSecondary) {
+      canvas.push("text-white");
+    } else {
+      canvas.push("text-primary-orange");
+    }
   } else {
     canvas.push("font-medium");
+    if (isSecondary) {
+      canvas.push("text-white");
+    } else {
+      canvas.push("text-black");
+    }
   }
 
   return (
-    <Link to={href} style={{ pointerEvents: isComingSoon ? "none" : "" }} className="flex items-center gap-2">
+    <Link
+      to={href}
+      style={{ pointerEvents: isComingSoon ? "none" : "" }}
+      className="flex items-center gap-2"
+      onClick={onClick}
+    >
       <h5 className={canvas.join(" ").concat(" ", "hover:text-primary-orange")}>
         {placeholder}
       </h5>

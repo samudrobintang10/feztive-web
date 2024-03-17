@@ -14,7 +14,11 @@ export default {
         "primary-blue": "#0066FF",
         "secondary-blue": "#74BCFF",
         "secondary-grey": "#DCDCDC",
-        "tertiary-grey": "#AAAEBD"
+        "secondary-purple": "#C78EFF",
+        "tertiary-grey": "#AAAEBD",
+        "tertiary-blue": "#1F81E2",
+        "quarternary-grey": "#EEEEFF",
+        "broken-white": "#FAFAFA",
       },
       fontFamily: {
         monserrat: ["Montserrat"],

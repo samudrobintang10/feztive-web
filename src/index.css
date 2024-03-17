@@ -6,8 +6,12 @@
 @tailwind components;
 @tailwind utilities;
 
-#defaultLayout > header, main {
+main, #defaultLayout > header > .wrapper-header {
   @apply xl:max-w-screen-xl mx-auto w-full md:px-20 sm:px-12 px-6;
+}
+
+#defaultLayout {
+  @apply bg-broken-white;
 }
 
 /* for font purpuse only (can be replaced with inline tailwind) */

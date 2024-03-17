@@ -10,7 +10,7 @@ function MerchandiseMenuCard({ logo, title, isBlue }) {
     );
   }
   return (
-    <div className="grid gap-y-3 px-6 py-3 rounded-md border border-secondary-grey min-w-64">
+    <div className="grid gap-y-3 px-6 py-3 rounded-md bg-primary-white min-w-64">
       <div className={canvas.join(" ").concat(" ", brush.join(" "))}>
         <img
           src={logo}

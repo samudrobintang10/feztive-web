@@ -14,6 +14,8 @@ function Button({
   isSecondary,
   isPurple,
   isOrange,
+  isWhite,
+  isBlue,
   isSmall,
   isBig,
   isGradient,
@@ -27,7 +29,7 @@ function Button({
   if (isSmall) {
     canvas.push("py-2 px-[22px]");
   } else if (isBig) {
-    canvas.push("py-4 px-8 min-w-[400px]");
+    canvas.push("py-4 px-8 w-full");
     font.push("text-xl");
     // implement on further progress
   } else {
@@ -41,6 +43,9 @@ function Button({
     if (isPurple) {
       brush.push("outline-primary-purple text-primary-purple");
       font.push("text-primary-purple");
+    } else if (isWhite) {
+      brush.push("outline-white text-white");
+      font.push("text-white");
     } else {
       brush.push("outline-primary-music-jazz");
       font.push("text-primary-music-jazz");
@@ -52,7 +57,11 @@ function Button({
       brush.push("bg-primary-purple");
     } else if (isOrange) {
       brush.push("bg-primary-orange");
-    } else {
+    } else if (isBlue) (
+      brush.push("bg-tertiary-blue")
+    ) 
+    
+    else {
       if (isGradient) {
         brush.push(
           "bg-gradient-to-r from-primary-music-jazz to-primary-light-orange"

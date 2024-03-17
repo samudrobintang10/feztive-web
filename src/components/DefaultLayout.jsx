@@ -1,32 +1,28 @@
 import { Outlet } from "react-router-dom";
+import { useState } from "react";
 
 // Imported Png or Svg
 import FeztiveMiniLogoSvg from "../assets/svg/feztive-mini.svg";
 import FeztiveWhiteIconSvg from "../assets/svg/feztive-white-icon.svg";
 
-// Imported Components
+// Imported Elements
 import Button from "../elements/Button";
 import NavTab from "../elements/NavTab";
 import InputNext from "../elements/InputNext";
+import Header from "../elements/Header";
+
+import { Link, useLocation } from "react-router-dom";
 
 function DefaultLayout() {
+  const [page, setPage] = useState(location.pathname);
+
+  const handleSetPage = (state) => {
+    setPage(state);
+  };
+
   return (
     <div id="defaultLayout">
-      <header className="flex justify-between py-3">
-        <div className="flex gap-3 items-center">
-          <img src={FeztiveMiniLogoSvg} alt="Your SVG" />
-          <h2 className="text-primary-music-jazz font-monserrat font-bold">
-            Feztive
-          </h2>
-        </div>
-        <div className="flex gap-8 items-center">
-          <NavTab placeholder="Home" href={"/"} />
-          <NavTab placeholder="About" href={"/about"} />
-          <NavTab placeholder="Event" href={"/event"} isComingSoon />
-          <NavTab placeholder="Merchandise" href={"/merchandise"} />
-          <Button placeholder="Login" isSmall isSecondary />
-        </div>
-      </header>
+      <Header page={page} onOpenPage={handleSetPage} />
       <main>
         <Outlet />
       </main>

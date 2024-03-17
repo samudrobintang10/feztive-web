@@ -15,6 +15,9 @@ import RocketIconSvg from "../assets/svg/rocket-icon.svg";
 import StarIconSvg from "../assets/svg/star-icon.svg";
 import ClockIconSvg from "../assets/svg/clock-icon.svg";
 
+// Imported JSON for Example
+import MerchandiseJson from "../assets/json/merchandise.json";
+
 function Home() {
   return (
     <div className="home">
@@ -97,39 +100,17 @@ function Home() {
           </div>
           <div className="suggested-merchandise">
             <h3 className=" font-semibold pb-5">Suggested Merchandise</h3>
-            <div className="flex gap-x-4">
-              <MerchandiseCard
-                image={ExampleImagePng}
-                title="Blackpink the show bornpink show fe.... "
-                seller="Raihan"
-                availableStock={36}
-                totalStock={60}
-                icon={ClockIconSvg}
-              />
-              <MerchandiseCard
-                image={ExampleImagePng}
-                title="Blackpink the show bornpink show fe.... "
-                seller="Raihan"
-                availableStock={36}
-                totalStock={60}
-                icon={ClockIconSvg}
-              />
-              <MerchandiseCard
-                image={ExampleImagePng}
-                title="Blackpink the show bornpink show fe.... "
-                seller="Raihan"
-                availableStock={36}
-                totalStock={60}
-                icon={ClockIconSvg}
-              />
-              <MerchandiseCard
-                image={ExampleImagePng}
-                title="Blackpink the show bornpink show fe.... "
-                seller="Raihan"
-                availableStock={36}
-                totalStock={60}
-                icon={ClockIconSvg}
-              />
+            <div className="grid grid-cols-4 gap-x-4 gap-y-7">
+              {MerchandiseJson.map((merchandise) => (
+                <MerchandiseCard
+                  image={ExampleImagePng}
+                  title="Blackpink the show bornpink show fe.... "
+                  seller="Raihan"
+                  availableStock={36}
+                  totalStock={60}
+                  icon={ClockIconSvg}
+                />
+              ))}
             </div>
           </div>
         </div>
