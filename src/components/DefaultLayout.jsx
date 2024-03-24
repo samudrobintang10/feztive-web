@@ -1,24 +1,29 @@
 import { Outlet } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // Imported Png or Svg
-import FeztiveMiniLogoSvg from "../assets/svg/feztive-mini.svg";
 import FeztiveWhiteIconSvg from "../assets/svg/feztive-white-icon.svg";
 
 // Imported Elements
-import Button from "../elements/Button";
-import NavTab from "../elements/NavTab";
 import InputNext from "../elements/InputNext";
 import Header from "../elements/Header";
 
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 function DefaultLayout() {
+  let location = useLocation();
+
   const [page, setPage] = useState(location.pathname);
 
+  // setting the page to the as is
   const handleSetPage = (state) => {
     setPage(state);
   };
+
+  // implementing header as the location goes back
+  useEffect(() => {
+    setPage(location.pathname);
+  }, [location]);
 
   return (
     <div id="defaultLayout">

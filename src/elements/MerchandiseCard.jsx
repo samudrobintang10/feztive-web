@@ -9,7 +9,7 @@ function MerchandiseCard({
   return (
     <div className="p-3 bg-primary-white rounded-xl">
       <div className="pb-5">
-        <div className="relative ">
+        <div className="relative">
           <img
             src={image}
             alt="merchandise-product.png"

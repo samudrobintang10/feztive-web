@@ -10,10 +10,12 @@ import RocketIconSvg from "../assets/svg/rocket-icon.svg";
 import StarIconSvg from "../assets/svg/star-icon.svg";
 import ContentOnePng from "../assets/images/content1.png";
 import ClockIconSvg from "../assets/svg/clock-icon.svg";
+import ExampleEventDetailPng from "../assets/images/example-event-detail.png";
 
 // Imported JSON for Example
 import MerchandiseJson from "../assets/json/merchandise.json";
 import EventCard from "../elements/EventCard";
+import EventDetailInfo from "../elements/EventDetailInfo";
 
 function Event() {
   return (
@@ -66,10 +68,14 @@ function Event() {
                 </h3>
               </div>
             </div>
-            <div className="event-detail">
+            <div className="event-detail grid gap-y-3">
               <h3 className="font-semibold font-inter">Event Detail</h3>
+              <div className="grid gap-y-3">
+                <EventDetailInfo image={ExampleEventDetailPng} title={"16 August 20233, 6.15 PM IDT"} />
+                <EventDetailInfo image={ExampleEventDetailPng} title={"Plaza Senayan, DKI Jakarta"} />
+              </div>
             </div>
-            <Button isGradient placeholder={"Purchase Now"} isBig/>
+            <Button isGradient placeholder={"Purchase Now"} isBig />
           </div>
         </div>
       </div>
