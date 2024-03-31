@@ -20,6 +20,7 @@ function Button({
   isBig,
   isGradient,
   icon,
+  isSubmit,
 }) {
   const canvas = ["rounded flex gap-x-3 items-center justify-center"];
   const brush = [];
@@ -57,10 +58,7 @@ function Button({
       brush.push("bg-primary-purple");
     } else if (isOrange) {
       brush.push("bg-primary-orange");
-    } else if (isBlue) (
-      brush.push("bg-tertiary-blue")
-    ) 
-    
+    } else if (isBlue) brush.push("bg-tertiary-blue");
     else {
       if (isGradient) {
         brush.push(
@@ -72,13 +70,28 @@ function Button({
     }
   }
 
+  if (href) {
+    return (
+      <Link to={href}>
+        <button
+          className={canvas.join(" ").concat(" ", brush.join(" "))}
+          type={isSubmit}
+        >
+          <h5 className={font.join(" ")}>{placeholder}</h5>
+          <FontAwesomeIcon icon={icon} className="text-primary-white" />
+        </button>
+      </Link>
+    );
+  }
+
   return (
-    <Link to={href}>
-      <button className={canvas.join(" ").concat(" ", brush.join(" "))}>
-        <h5 className={font.join(" ")}>{placeholder}</h5>
-        <FontAwesomeIcon icon={icon} className="text-primary-white" />
-      </button>
-    </Link>
+    <button
+      className={canvas.join(" ").concat(" ", brush.join(" "))}
+      type={isSubmit}
+    >
+      <h5 className={font.join(" ")}>{placeholder}</h5>
+      <FontAwesomeIcon icon={icon} className="text-primary-white" />
+    </button>
   );
 }
 

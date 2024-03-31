@@ -65,7 +65,7 @@ function Header({ onOpenPage, page }) {
             onClick={() => onOpenPage("/merchandise")}
             isSecondary={page !== "/"}
           />
-          <Button placeholder="Login" isSmall isSecondary />
+          <Button placeholder="Login" isSmall isSecondary href={"/login"} />
         </div>
       </div>
       {page === "/merchandise" && (

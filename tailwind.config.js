@@ -18,6 +18,7 @@ export default {
         "tertiary-grey": "#AAAEBD",
         "tertiary-blue": "#1F81E2",
         "quarternary-grey": "#EEEEFF",
+        "quinary-grey": "#63676F",
         "broken-white": "#FAFAFA",
       },
       fontFamily: {
