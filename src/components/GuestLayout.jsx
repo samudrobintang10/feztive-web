@@ -43,17 +43,10 @@ function GuestLayout() {
         </div>
       </header>
       <main>
-        <div className="mt-12 w-5/12">
+        <div className="mt-12">
           <Outlet />
         </div>
       </main>
-      <div className="absolute right-0 top-0">
-        <img
-          src={GuestImage}
-          alt="GuestImage.png"
-          className=" h-screen w-full"
-        />
-      </div>
     </div>
   );
 }

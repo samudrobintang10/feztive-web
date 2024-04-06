@@ -25,42 +25,43 @@ function Login() {
   };
 
   return (
-    <div className="login-page">
-      <form onSubmit={handleSubmit}>
-        <h1 className="font-semibold text-3xl mb-1">Login</h1>
-        <h4 className="font-normal text-quinary-grey">
-          Login to see all services that we have!
-        </h4>
-        <div className="content-login mt-9 grid gap-y-9">
-          <Input
-            placeholder={"Email"}
-            isEmail
-            name={"email"}
-            value={formData.email}
-            onChange={handleChange}
-          />
-          <Input
-            placeholder={"Password"}
-            isPassword
-            name={"password"}
-            value={formData.password}
-            onChange={handleChange}
-          />
-        </div>
-        <Link to={"/password/reset"}>
-          <h4 className="w-full text-right mt-2 mb-12 text-quinary-grey">
-            Forgot Password?
+    <div className="login-page grid justify-items-center">
+      <div className="w-1/2 px-10 py-5 border border-secondary-grey rounded-xl">
+        <form onSubmit={handleSubmit}>
+          <h1 className="font-semibold text-3xl mb-1">Login</h1>
+          <h4 className="font-normal text-quinary-grey">
+            Login to see all services that we have!
           </h4>
-        </Link>
-
-        <Button placeholder={"Login"} isBig isPurple isSubmit />
-        <h4 className="w-full text-center mt-4 text-quinary-grey">
-          Doesn’t have account?&nbsp;
-          <Link to={"/register"}>
-            <span className="text-primary-blue font-semibold">Sign Up</span>
+          <div className="content-login mt-9 grid gap-y-9">
+            <Input
+              placeholder={"Email"}
+              isEmail
+              name={"email"}
+              value={formData.email}
+              onChange={handleChange}
+            />
+            <Input
+              placeholder={"Password"}
+              isPassword
+              name={"password"}
+              value={formData.password}
+              onChange={handleChange}
+            />
+          </div>
+          <Link to={"/password/reset"}>
+            <h4 className="w-full text-right mt-2 mb-12 text-quinary-grey">
+              Forgot Password?
+            </h4>
           </Link>
-        </h4>
-      </form>
+          <Button placeholder={"Login"} isBig isPurple isSubmit />
+          <h4 className="w-full text-center mt-4 text-quinary-grey">
+            Doesn’t have account?&nbsp;
+            <Link to={"/register"}>
+              <span className="text-primary-blue font-semibold">Sign Up</span>
+            </Link>
+          </h4>
+        </form>
+      </div>
     </div>
   );
 }
