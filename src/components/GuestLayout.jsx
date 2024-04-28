@@ -36,7 +36,7 @@ function GuestLayout() {
               alt="Your SVG"
               className="bg-primary-white rounded-full justify-self-center"
             />
-            <h2 className={"font-monserrat font-bold text-primary-music-jazz"}>
+            <h2 className={"font-monserrat font-bold text-primary-music-jazz lg:text-2xl text-base"}>
               Feztive
             </h2>
           </div>

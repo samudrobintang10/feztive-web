@@ -27,11 +27,11 @@ function Input({
 
   return (
     <div className="input grid gap-y-2">
-      <h4 className="font-semibold">{placeholder}</h4>
+      <h6 className="font-semibold lg:text-base">{placeholder}</h6>
       <input
         type={type.join(" ")}
         placeholder={placeholder}
-        className="py-3 px-4 w-full border rounded-md border-quinary-grey text-base"
+        className="py-3 px-4 w-full border rounded-md border-quinary-grey lg:text-base text-xs"
         name={name}
         value={value}
         onChange={onChange}

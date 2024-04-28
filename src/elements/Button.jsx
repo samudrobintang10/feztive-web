@@ -21,21 +21,22 @@ function Button({
   isGradient,
   icon,
   isSubmit,
+  onClick
 }) {
   const canvas = ["rounded flex gap-x-3 items-center justify-center"];
   const brush = [];
-  const font = [];
+  const font = ["font-semibold"];
 
   // Button size
   if (isSmall) {
     canvas.push("py-2 px-[22px]");
   } else if (isBig) {
     canvas.push("py-4 px-8 w-full");
-    font.push("text-xl");
+    font.push("lg:text-xl text-xs");
     // implement on further progress
   } else {
     canvas.push("py-4 px-8");
-    font.push("text-lg");
+    font.push("lg:text-lg text-xs");
   }
 
   // Button type with extended on color
@@ -88,8 +89,9 @@ function Button({
     <button
       className={canvas.join(" ").concat(" ", brush.join(" "))}
       type={isSubmit}
+      onClick={onClick}
     >
-      <h5 className={font.join(" ")}>{placeholder}</h5>
+      <h6 className={font.join(" ")}>{placeholder}</h6>
       <FontAwesomeIcon icon={icon} className="text-primary-white" />
     </button>
   );

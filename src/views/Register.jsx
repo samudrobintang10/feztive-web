@@ -28,14 +28,14 @@ function Register() {
   };
 
   return (
-    <div className="register-page grid justify-items-center mb-12">
-      <div className="w-1/2 px-10 py-5 border border-secondary-grey rounded-xl">
+    <div className="register-page lg:grid lg:justify-items-center mb-12">
+      <div className="lg:w-1/2 lg:px-10 py-5 px-5 border border-secondary-grey rounded-xl">
         <form onSubmit={handleSubmit}>
-          <h1 className="font-semibold text-3xl mb-1">Register</h1>
-          <h4 className="font-normal text-quinary-grey">
+          <h1 className="font-semibold lg:text-3xl mb-1 text-base">Register</h1>
+          <h6 className="font-normal text-quinary-grey lg:text-base">
             Register to setup your account!
-          </h4>
-          <div className="content-register mt-9 mb-12 grid gap-y-9">
+          </h6>
+          <div className="content-register mt-9 mb-12 grid lg:gap-y-9 gap-y-6">
             <Input
               placeholder={"Email"}
               isEmail
@@ -71,12 +71,12 @@ function Register() {
             />
           </div>
           <Button placeholder={"Register"} isBig isPurple isSubmit />
-          <h4 className="w-full text-center mt-4 text-quinary-grey">
+          <h6 className="w-full text-center mt-4 text-quinary-grey lg:text-base">
             Already have account?&nbsp;
             <Link to={"/login"}>
               <span className="text-primary-blue font-semibold">Sign in</span>
             </Link>
-          </h4>
+          </h6>
         </form>
       </div>
     </div>
