@@ -147,6 +147,7 @@ function Home() {
                 isBig
                 isOrange
                 icon={faAngleRight}
+                href={"/dashboard-catalog"}
               />
             </div>
           </div>
