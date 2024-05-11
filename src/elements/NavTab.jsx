@@ -1,6 +1,15 @@
 import { Link, useLocation } from "react-router-dom";
 
-function NavTab({ placeholder, href, isComingSoon, onClick, isSecondary }) {
+
+
+function NavTab({
+  placeholder,
+  href,
+  isComingSoon,
+  onClick,
+  isSecondary,
+  isDropdown
+}) {
   const canvas = [];
 
   // Knowing the location of the url
@@ -29,7 +38,11 @@ function NavTab({ placeholder, href, isComingSoon, onClick, isSecondary }) {
       className="flex items-center gap-2"
       onClick={onClick}
     >
-      <h5 className={canvas.join(" ").concat(" ", "hover:text-primary-orange")}>
+      <h5
+        className={canvas
+          .join(" ")
+          .concat(" ", !isDropdown && "hover:text-primary-orange")}
+      >
         {placeholder}
       </h5>
       {isComingSoon && (

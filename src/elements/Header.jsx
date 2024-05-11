@@ -2,18 +2,27 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NavTab from "./NavTab";
 import Button from "./Button";
+import { useState } from "react";
 
 // Imported Png or Svg
 import FeztiveMiniLogoSvg from "../assets/svg/feztive-mini.svg";
 import BoxOnePng from "../assets/images/box1.png";
 import BoxTwoPng from "../assets/images/box2.png";
-import LineScrowlingOnePng from "../assets/images/LineScrowling1.png";
-import LineScrowlingTwoPng from "../assets/images/LineScrowling2.png";
 import CupOnePng from "../assets/images/cup1.png";
 import CubeOnePng from "../assets/images/cube1.png";
+import {
+  faAngleDown,
+  faSignIn,
+  faSignOut,
+} from "@fortawesome/free-solid-svg-icons";
 
-function Header({ onOpenPage, page }) {
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import { Divider } from "@mui/material";
+
+function Header({ onOpenPage, page, token, onLogout }) {
   const brush = [];
+  const pageSecondary = ["/event", "/merchandise"];
   if (page === "/merchandise") {
     brush.length = 0;
     brush.push("bg-gradient-to-r from-secondary-purple to-primary-purple");
@@ -22,6 +31,17 @@ function Header({ onOpenPage, page }) {
     brush.length = 0;
     brush.push("bg-gradient-to-r from-primary-blue to-secondary-blue");
   }
+
+  // Set on dropdown navbar
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <header className={"header relative z-0".concat(" ", brush.join(" "))}>
       <div className="wrapper-header flex justify-between py-3 z-20">
@@ -34,7 +54,9 @@ function Header({ onOpenPage, page }) {
           <h2
             className={"font-monserrat font-bold".concat(
               " ",
-              page !== "/" ? "text-white" : "text-primary-music-jazz"
+              pageSecondary.includes(page)
+                ? "text-white"
+                : "text-primary-music-jazz"
             )}
           >
             Feztive
@@ -45,27 +67,100 @@ function Header({ onOpenPage, page }) {
             placeholder="Home"
             href={"/"}
             onClick={() => onOpenPage("/")}
-            isSecondary={page !== "/"}
+            isSecondary={pageSecondary.includes(page)}
           />
           <NavTab
             placeholder="About"
             href={"/about"}
             onClick={() => onOpenPage("/about")}
-            isSecondary={page !== "/"}
+            isSecondary={pageSecondary.includes(page)}
           />
           <NavTab
             placeholder="Event"
             href={"/event"}
             onClick={() => onOpenPage("/event")}
-            isSecondary={page !== "/"}
+            isSecondary={pageSecondary.includes(page)}
           />
           <NavTab
             placeholder="Merchandise"
             href={"/merchandise"}
             onClick={() => onOpenPage("/merchandise")}
-            isSecondary={page !== "/"}
+            isSecondary={pageSecondary.includes(page)}
           />
-          <Button placeholder="Login" isSmall isSecondary href={"/login"} />
+          {token && (
+            <div className="vertical-line border-l-2 h-1/2 border-l-black"></div>
+          )}
+          {token && (
+            <div className="dropdown hover:cursor-pointer">
+              <div className="flex items-center gap-x-4" onClick={handleClick}>
+                <h5
+                  className={(pageSecondary.includes(page)
+                    ? "text-white"
+                    : "text-black"
+                  ).concat(" ", "hover:text-primary-orange")}
+                >
+                  My Account
+                </h5>
+                <FontAwesomeIcon
+                  icon={faAngleDown}
+                  className={
+                    pageSecondary.includes(page) ? "text-white" : "text-black"
+                  }
+                />
+              </div>
+              <Menu
+                anchorEl={anchorEl}
+                id="account-menu"
+                open={open}
+                onClose={handleClose}
+                onClick={handleClose}
+                PaperProps={{
+                  elevation: 0,
+                  sx: {
+                    overflow: "visible",
+                    mt: 1.5,
+                    "& .MuiAvatar-root": {
+                      width: 32,
+                      height: 32,
+                      ml: -0.5,
+                      mr: 1,
+                    },
+                    border: 1,
+                    borderColor: "#D8D8D8",
+                  },
+                }}
+                transformOrigin={{ horizontal: "right", vertical: "top" }}
+                anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+              >
+                <MenuItem>
+                  <NavTab
+                    placeholder="Profile"
+                    href={"/profile"}
+                    onClick={() => onOpenPage("/profile")}
+                  />
+                </MenuItem>
+                <MenuItem>
+                  <NavTab
+                    placeholder="Dashboard Catalog"
+                    href={"/dashboard-catalog"}
+                    onClick={() => onOpenPage("/dashboard-catalog")}
+                  />
+                </MenuItem>
+                <Divider component="li" />
+                <MenuItem onClick={onLogout} sx={{ columnGap: 1 }}>
+                  <FontAwesomeIcon
+                    icon={faSignOut}
+                    className="text-primary-red"
+                    style={{ transform: "rotate(180deg)" }}
+                  />
+                  <h5 className={"text-primary-red"}>Logout</h5>
+                </MenuItem>
+              </Menu>
+            </div>
+          )}
+          {!token && (
+            <Button placeholder="Login" isSmall isSecondary href={"/login"} />
+          )}
         </div>
       </div>
       {page === "/merchandise" && (

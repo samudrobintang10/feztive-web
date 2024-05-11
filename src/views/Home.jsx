@@ -101,15 +101,17 @@ function Home() {
           <div className="suggested-merchandise">
             <h3 className=" font-semibold pb-5">Suggested Merchandise</h3>
             <div className="grid grid-cols-4 gap-x-4 gap-y-7">
-              {MerchandiseJson.map((merchandise) => (
-                <MerchandiseCard
-                  image={ExampleImagePng}
-                  title="Blackpink the show bornpink show fe.... "
-                  seller="Raihan"
-                  availableStock={36}
-                  totalStock={60}
-                  icon={ClockIconSvg}
-                />
+              {MerchandiseJson.map((merchandise, index) => (
+                <div key={index}>
+                  <MerchandiseCard
+                    image={ExampleImagePng}
+                    title="Blackpink the show bornpink show fe.... "
+                    seller="Raihan"
+                    availableStock={36}
+                    totalStock={60}
+                    icon={ClockIconSvg}
+                  />
+                </div>
               ))}
             </div>
           </div>

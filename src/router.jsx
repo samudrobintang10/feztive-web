@@ -8,6 +8,7 @@ import Merchandise from "./views/Merchandise";
 import Login from "./views/Login";
 import Register from "./views/Register";
 import ResetPassword from "./views/ResetPassword";
+import DashboardCatalog from "./views/DashboardCatalog";
 
 const router = createBrowserRouter([
     {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
             {
                 path: "/merchandise",
                 element: <Merchandise />
+            },
+            {
+                path: "/dashboard-catalog",
+                element: <DashboardCatalog />
             }
         ]
     },

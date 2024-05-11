@@ -7,6 +7,7 @@ import ModalPopUp from "../elements/ModalPopUp";
 import axiosClient from "../axios-client";
 import { useStateContext } from "../contexts/ContextProvider";
 import { SwipeableDrawer } from "@mui/material";
+import axios from "axios";
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -36,28 +37,19 @@ function Login() {
       email: formData.email,
       password: formData.password,
     };
-    setOpenAlert(true);
+    // setOpenAlert(true);
 
-    // setErrors(null);
+    setErrors(null);
     axiosClient
       .post("/users/login", payload)
       .then(({ data }) => {
-        setUser(data.user);
-        setToken(data.token);
-        console.log("SUCCESS");
+        // setUser(data.user);
+        setToken(data.accessToken);
       })
       .catch((err) => {
         const response = err.response;
-        if (response && response.status === 422) {
-          if (response.data.errors) {
-            setErrors(response.data.errors);
-            setOpenAlert(true);
-          } else {
-            setErrors({
-              email: [response.data.message],
-            });
-          }
-        }
+        setErrors(response.data.error)
+        setOpenAlert(true);
       });
   };
 

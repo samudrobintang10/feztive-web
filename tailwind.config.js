@@ -12,6 +12,7 @@ export default {
         "primary-light-orange": "#FFA674",
         "primary-music-jazz": "#FF3D00",
         "primary-blue": "#0066FF",
+        "primary-red": "#E7073E",
         "secondary-blue": "#74BCFF",
         "secondary-grey": "#DCDCDC",
         "secondary-purple": "#C78EFF",
