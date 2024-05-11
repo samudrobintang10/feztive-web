@@ -23,10 +23,11 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/home" element={<Navigate to="/" />} />
           <Route path="/about" element={<About />} />
-          <Route path="/event" element={<Event />} />
-          <Route path="/merchandise" element={<Merchandise />} />
+          {/* <Route path="/event" element={<Event />} />
+          <Route path="/merchandise" element={<Merchandise />} /> */}
           <Route path="/dashboard-catalog" element={<DashboardCatalog />} />
         </Route>
+        <Route path="/merchandise" element={<Merchandise />} />
         <Route path="/" element={<GuestLayout />}>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
