@@ -6,13 +6,7 @@ import { useRef } from "react";
 
 // The default of this FileInput elements is isPrimary and isNormal
 
-function FileInput({
-  placeholder,
-  file,
-  fileName,
-  handleImageChange,
-  name
-}) {
+function FileInput({ placeholder, file, fileName, handleImageChange, name }) {
   // Create a reference to the hidden file input element
   const hiddenFileInput = useRef(null);
 
@@ -26,7 +20,7 @@ function FileInput({
   // to handle the user-selected file
   const handleChange = (ev) => {
     const fileUploaded = ev?.target?.files[0];
-    handleImageChange(ev.target.name, fileUploaded)
+    handleImageChange(ev.target.name, fileUploaded);
     // setFile(URL.createObjectURL(fileUploaded));
     // setFileName(fileUploaded.name);
   };
@@ -34,7 +28,10 @@ function FileInput({
   return (
     <div className="input-file grid gap-y-2">
       <h6 className="font-semibold lg:text-base">{placeholder}</h6>
-      <button className="border-2 border-dashed border-tertiary-grey rounded-xl py-10" onClick={handleClick}>
+      <button
+        className="border-2 border-dashed border-tertiary-grey rounded-xl py-10"
+        onClick={handleClick}
+      >
         <div className="grid gap-y-2 place-content-center">
           {file && (
             <div className="grid gap-y-2">
@@ -48,7 +45,9 @@ function FileInput({
                 icon={faFileUpload}
                 className="text-black text-xl justify-self-center"
               />
-              <h4 className="font-inter">Upload image</h4>
+              <h6 className="font-inter font-semibold lg:text-base">
+                Upload image
+              </h6>
             </div>
           )}
         </div>

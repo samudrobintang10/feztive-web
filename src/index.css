@@ -9,7 +9,7 @@
 #defaultLayout > main,
 #guestLayout > main,
 #defaultLayout > header > .wrapper-header,
-#guestLayout > header > .wrapper-header-guest {
+#guestLayout > header > .wrapper-header {
   @apply xl:max-w-screen-xl mx-auto w-full md:px-20 sm:px-12 px-6;
 }
 

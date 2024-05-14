@@ -52,7 +52,7 @@ function Header({ onOpenPage, page, token, onLogout }) {
             className="bg-primary-white rounded-full justify-self-center"
           />
           <h2
-            className={"font-monserrat font-bold".concat(
+            className={"lg:text-2xl text-base font-monserrat font-bold".concat(
               " ",
               pageSecondary.includes(page)
                 ? "text-white"
@@ -62,7 +62,7 @@ function Header({ onOpenPage, page, token, onLogout }) {
             Feztive
           </h2>
         </div>
-        <div className="flex gap-8 items-center">
+        <div className="gap-8 items-center hidden lg:flex">
           <NavTab
             placeholder="Home"
             href={"/"}
