@@ -1,18 +1,10 @@
-import { List, ListItem, ListItemText } from "@mui/material";
+import { List, ListItem } from "@mui/material";
 import Input from "../elements/Input";
 import Button from "../elements/Button";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCloudUpload,
-  faCloudUploadAlt,
-  faFileUpload,
-  faUpload,
-} from "@fortawesome/free-solid-svg-icons";
-import { useRef, useState } from "react";
+import {useState } from "react";
 import FileInput from "../elements/FileInput";
 import CheckboxInput from "../elements/CheckboxInput";
 import VerificationPng from "../assets/images/verification.png";
-import HeroPng from "../assets/images/hero.png";
 
 function DashboardCatalog() {
   const [waitingForVerification, setWaitingForVerification] = useState(false);
@@ -47,7 +39,6 @@ function DashboardCatalog() {
   // Handler sending form
   const handleSubmit = (ev) => {
     ev.preventDefault(); // Prevent default action from form
-    console.log(formData);
     setWaitingForVerification(true);
     // setRejectNotes(
     //   "Your KTP & half-body photo still blur. Fullname still different with KTP"

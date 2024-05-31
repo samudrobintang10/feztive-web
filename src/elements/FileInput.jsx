@@ -28,7 +28,7 @@ function FileInput({ placeholder, file, fileName, handleImageChange, name }) {
   return (
     <div className="input-file grid gap-y-2">
       <h6 className="font-semibold lg:text-base">{placeholder}</h6>
-      <button
+      <div
         className="border-2 border-dashed border-tertiary-grey rounded-xl py-10"
         onClick={handleClick}
       >
@@ -36,11 +36,11 @@ function FileInput({ placeholder, file, fileName, handleImageChange, name }) {
           {file && (
             <div className="grid gap-y-2">
               <img src={file} className="w-10/12 justify-self-center" />
-              <h4 className="font-inter">{fileName}</h4>
+              <h4 className="font-inter text-center">{fileName}</h4>
             </div>
           )}
           {!file && (
-            <div className="uploader">
+            <div className="uploader text-center">
               <FontAwesomeIcon
                 icon={faFileUpload}
                 className="text-black text-xl justify-self-center"
@@ -51,7 +51,7 @@ function FileInput({ placeholder, file, fileName, handleImageChange, name }) {
             </div>
           )}
         </div>
-      </button>
+      </div>
       <input
         type="file"
         accept="image/*"
