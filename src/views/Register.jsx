@@ -1,9 +1,13 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext } from "react";
 import Button from "../elements/Button";
 import Input from "../elements/Input";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axiosClient from "../axios-client";
+import { ToastContext } from "../contexts/ToastContext";
 
 function Register() {
+  const navigate = useNavigate();
+  const { showToast } = useContext(ToastContext);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -24,7 +28,31 @@ function Register() {
   // Handler sending form
   const handleSubmit = (ev) => {
     ev.preventDefault(); // Prevent default action from form
-    console.log(formData); // Call on Submit
+    const payload = {
+      email: formData.email,
+      password: formData.password,
+      phoneNumber: formData.phone_number,
+      firstName: formData.first_name,
+      lastName: formData.last_name
+    };
+    
+    axiosClient
+      .post("/users/register", payload)
+      .then(({ data }) => {
+        showToast("Success", "Account Created! Please log in using the username and password you have registered!", "success");
+        navigate('/login');
+      })
+      .catch((err) => {
+        const response = err.response;
+        setToastTitle("Error");
+        setToastDescription(response.data.error);
+        setOpenAlert(true);
+      });
+  };
+
+  // Handler on Alert
+  const handleCloseAlert = () => {
+    setOpenAlert(false);
   };
 
   return (

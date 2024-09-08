@@ -1,21 +1,19 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext } from "react";
 import Button from "../elements/Button";
 import Input from "../elements/Input";
 import { Link } from "react-router-dom";
-import Toast from "../elements/Toast";
 import ModalPopUp from "../elements/ModalPopUp";
 import axiosClient from "../axios-client";
 import { useStateContext } from "../contexts/ContextProvider";
 import { SwipeableDrawer } from "@mui/material";
-import axios from "axios";
+import { ToastContext } from "../contexts/ToastContext";
 
 function Login() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-  const [errors, setErrors] = useState(null);
-  const [openAlert, setOpenAlert] = useState(false);
+  const { showToast } = useContext(ToastContext);
   const [openResetPasswordModal, setOpenResetPasswordModal] = useState(false);
   const [openResetPasswordDrawer, setOpenResetPasswordDrawer] = useState(false);
 
@@ -30,6 +28,20 @@ function Login() {
     });
   };
 
+  const getUserDetail = async (token) => {
+    try {
+      const response = await axiosClient.get("/users/get-user-details", {
+        headers: {
+          'X-Authorization': token,
+        },
+      });
+      setUser(response.data.detail);
+    } catch (error) {
+      const response = err.response;
+      showToast("Error", response.data.error, "error");
+    }
+  };
+
   // Handler sending form
   const handleSubmit = (ev) => {
     ev.preventDefault(); // Prevent default action from form
@@ -37,19 +49,18 @@ function Login() {
       email: formData.email,
       password: formData.password,
     };
-    // setOpenAlert(true);
 
-    setErrors(null);
     axiosClient
       .post("/users/login", payload)
       .then(({ data }) => {
         // setUser(data.user);
-        setToken(data.accessToken);
+        getUserDetail(data.token);
+        setToken(data.token);
+        showToast("Success", "Successfully login!", "success");
       })
       .catch((err) => {
         const response = err.response;
-        setErrors(response.data.error)
-        setOpenAlert(true);
+        showToast("Error", response.data.message, "error");
       });
   };
 
@@ -76,19 +87,8 @@ function Login() {
     setOpenResetPasswordDrawer(false);
   };
 
-  // Handler on Alert
-  const handleCloseAlert = () => {
-    setOpenAlert(false);
-  };
-
   return (
     <div className="login-page lg:grid lg:justify-items-center">
-      <Toast
-        open={openAlert}
-        onClose={handleCloseAlert}
-        title={"Error"}
-        description={errors}
-      />
       <ModalPopUp
         open={openResetPasswordModal}
         onClose={handleCloseResetPasswordModal}

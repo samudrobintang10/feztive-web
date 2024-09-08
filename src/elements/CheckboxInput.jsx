@@ -5,12 +5,8 @@ import { Checkbox } from "@mui/material";
 function CheckboxInput({
   href,
   placeholder,
-  name,
-  value,
-  isEmail,
-  isPassword,
-  isNumber,
-  onChange,
+  handleChange,
+  checked
 }) {
   const type = [];
 
@@ -23,6 +19,8 @@ function CheckboxInput({
             color: "#8000FF",
           },
         }}
+        onChange={handleChange}
+        checked={checked}
       />
       <h6 className="lg:text-base">{placeholder}</h6>
     </div>

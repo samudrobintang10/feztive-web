@@ -1,14 +1,25 @@
 import { List, ListItem } from "@mui/material";
 import Input from "../elements/Input";
 import Button from "../elements/Button";
-import {useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import FileInput from "../elements/FileInput";
 import CheckboxInput from "../elements/CheckboxInput";
 import VerificationPng from "../assets/images/verification.png";
+import { ToastContext } from "../contexts/ToastContext";
+import axiosClient from "../axios-client";
+import { useStateContext } from "../contexts/ContextProvider";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { storage } from "../firebase";
+import { v4 } from "uuid";
 
 function DashboardCatalog() {
   const [waitingForVerification, setWaitingForVerification] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [rejectNotes, setRejectNotes] = useState("");
+  const [checkedTerms, setCheckedTerms] = useState(false);
+  const { showToast } = useContext(ToastContext);
+  const { user, token, notification, setUser, setToken, setNotification } =
+    useStateContext();
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -17,6 +28,11 @@ function DashboardCatalog() {
     halfBodyWithKtpPhoto: {},
     halfBodyWithKtpPhotoBlob: "",
   });
+
+  // handling checkbox and make upload button work
+  const handleCheckboxChange = (event) => {
+    setCheckedTerms(event.target.checked);
+  };
 
   // Handler input value changes on Image
   const handleImageChange = (name, value) => {
@@ -36,14 +52,125 @@ function DashboardCatalog() {
     });
   };
 
-  // Handler sending form
+  const getUserDetail = async (token) => {
+    try {
+      const response = await axiosClient.get("/users/get-user-details", {
+        headers: {
+          "X-Authorization": token,
+        },
+      });
+      setUser(response.data.detail);
+    } catch (error) {
+      const response = err.response;
+      showToast("Error", response.data.error, "error");
+    }
+  };
+
+  const getValidationData = async (valid_id) => {
+    const payload = {
+      validationId: valid_id,
+    };
+    axiosClient
+      .post("/users/validation/get", payload)
+      .then(({ data }) => {
+        console.log(data)
+        if (data.status === "PENDING") {
+          setWaitingForVerification(true);
+        } else if (data.status === "REJECTED") {
+          setRejectNotes(data.remarks);
+          setFormData({
+            fullName: data.idNumber,
+            ktpPhoto: {},
+            ktpPhotoBlob: data.idPhoto,
+            halfBodyWithKtpPhoto: {},
+            halfBodyWithKtpPhotoBlob: data.selfiePhoto,
+          });
+        }
+      })
+      .catch((err) => {
+        const response = err.response;
+      });
+  };
+
   const handleSubmit = (ev) => {
     ev.preventDefault(); // Prevent default action from form
-    setWaitingForVerification(true);
-    // setRejectNotes(
-    //   "Your KTP & half-body photo still blur. Fullname still different with KTP"
-    // );
+    setLoading(true);
+    // setWaitingForVerification(true);
+
+    const ktpPhotoRef = ref(
+      storage,
+      `images/ktpPhoto/${formData.ktpPhoto.name + v4()}`
+    );
+    const halfBodyWithKtpPhotoRef = ref(
+      storage,
+      `images/halfBodyWithKtpPhoto/${formData.halfBodyWithKtpPhoto.name + v4()}`
+    );
+
+    // Upload the KTP photo
+    uploadBytes(ktpPhotoRef, formData.ktpPhoto).then((ktpSnapshot) => {
+      getDownloadURL(ktpSnapshot.ref).then((ktpUrl) => {
+        // Upload the half-body with KTP photo
+        uploadBytes(
+          halfBodyWithKtpPhotoRef,
+          formData.halfBodyWithKtpPhoto
+        ).then((selfieSnapshot) => {
+          getDownloadURL(selfieSnapshot.ref).then((selfieUrl) => {
+            // Now that we have the download URLs, we can construct the payload
+
+            if (user?.validations[0]?.validationId) {
+              const payload = {
+                validationId: user?.validations[0]?.validationId,
+                idNumber: formData.fullName,
+                idPhoto: ktpUrl,
+                selfiePhoto: selfieUrl,
+              };
+              axiosClient
+                .post("/users/validation/update", payload)
+                .then(({ data }) => {
+                  getUserDetail(token);
+                  showToast("Success", "Your Data is on Updated", "success");
+                  setLoading(false);
+                  setWaitingForVerification(true);
+                })
+                .catch((err) => {
+                  const response = err.response;
+                  showToast("Error", response.data.error, "error");
+                  setLoading(false);
+                });
+            } else {
+              const payload = {
+                userId: user.userId,
+                idNumber: formData.fullName,
+                idPhoto: ktpUrl,
+                selfiePhoto: selfieUrl,
+              };
+              axiosClient
+                .post("/users/validation/create", payload)
+                .then(({ data }) => {
+                  getUserDetail(token);
+                  showToast(
+                    "Success",
+                    "Your Data is on Verification!",
+                    "success"
+                  );
+                  setLoading(false);
+                  setWaitingForVerification(true);
+                })
+                .catch((err) => {
+                  const response = err.response;
+                  showToast("Error", response.data.error, "error");
+                  setLoading(false);
+                });
+            }
+          });
+        });
+      });
+    });
   };
+
+  useEffect(() => {
+    getValidationData(user?.validations[0]?.validationId);
+  }, []);
 
   return (
     <div className="dashboard catalog">
@@ -137,8 +264,17 @@ function DashboardCatalog() {
                   />
                   <CheckboxInput
                     placeholder={"Read privacy policy, terms, and conditions"}
+                    handleChange={handleCheckboxChange}
+                    checked={checkedTerms}
                   />
-                  <Button placeholder={"Upload"} isBig isPurple isSubmit />
+                  <Button
+                    placeholder={"Upload"}
+                    isBig
+                    isDisabled={!checkedTerms}
+                    isPurple
+                    isSubmit
+                    isLoading={loading}
+                  />
                 </div>
               </form>
             </div>

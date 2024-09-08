@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { CircularProgress } from "@mui/material";
 
 // The default of this button elements is isPrimary and isNormal
 // There are three types of size: isSmall, isNormal (Default), and isBig
@@ -21,7 +22,9 @@ function Button({
   isGradient,
   icon,
   isSubmit,
-  onClick
+  isDisabled,
+  isLoading,
+  onClick,
 }) {
   const canvas = ["rounded flex gap-x-3 items-center justify-center"];
   const brush = [];
@@ -52,6 +55,10 @@ function Button({
       brush.push("outline-primary-music-jazz");
       font.push("text-primary-music-jazz");
     }
+  }
+  if (isDisabled) {
+    brush.push("bg-primary-grey");
+    font.push("text-white");
   } else {
     // The filled button is always has white color font
     font.push("text-primary-white");
@@ -77,6 +84,7 @@ function Button({
         <button
           className={canvas.join(" ").concat(" ", brush.join(" "))}
           type={isSubmit}
+          disabled={isDisabled}
         >
           <h5 className={font.join(" ")}>{placeholder}</h5>
           <FontAwesomeIcon icon={icon} className="text-primary-white" />
@@ -90,9 +98,15 @@ function Button({
       className={canvas.join(" ").concat(" ", brush.join(" "))}
       type={isSubmit}
       onClick={onClick}
+      disabled={isDisabled}
     >
-      <h6 className={font.join(" ")}>{placeholder}</h6>
-      <FontAwesomeIcon icon={icon} className="text-primary-white" />
+      {!isLoading && (
+        <div className="placeholder-button">
+          <h6 className={font.join(" ")}>{placeholder}</h6>
+          <FontAwesomeIcon icon={icon} className="text-primary-white" />
+        </div>
+      )}
+      {isLoading && <CircularProgress sx={{ color: "white" }} size={28} />}
     </button>
   );
 }
