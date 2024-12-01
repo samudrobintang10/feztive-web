@@ -13,6 +13,7 @@ function Input({
   isPassword,
   isNumber,
   onChange,
+  isSmall
 }) {
   const type = [];
   if (isEmail) {
@@ -27,11 +28,11 @@ function Input({
 
   return (
     <div className="input grid gap-y-2">
-      <h6 className="font-semibold lg:text-base">{placeholder}</h6>
+      <h6 className={`font-semibold ${isSmall ? "text-xs": "lg:text-base text-xs"}`}>{placeholder}</h6>
       <input
         type={type.join(" ")}
         placeholder={placeholder}
-        className="py-3 px-4 w-full border rounded-md border-quinary-grey lg:text-base text-xs"
+        className={`py-3 px-4 w-full border rounded-md border-quinary-grey ${isSmall ? "text-xs": "lg:text-base text-xs"}`}
         name={name}
         value={value}
         onChange={onChange}

@@ -1,5 +1,7 @@
+const withMT = require("@material-tailwind/react/utils/withMT");
+
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = withMT({
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
@@ -13,6 +15,7 @@ export default {
         "primary-music-jazz": "#FF3D00",
         "primary-blue": "#0066FF",
         "primary-red": "#E7073E",
+        "primary-pink": "#F8E6FF",
         "secondary-blue": "#74BCFF",
         "secondary-grey": "#DCDCDC",
         "secondary-purple": "#C78EFF",
@@ -20,6 +23,7 @@ export default {
         "tertiary-blue": "#1F81E2",
         "quarternary-grey": "#EEEEFF",
         "quinary-grey": "#63676F",
+        "senary-grey": "#E1E1E1",
         "broken-white": "#FAFAFA",
       },
       fontFamily: {
@@ -29,4 +33,4 @@ export default {
     },
   },
   plugins: [],
-};
+});

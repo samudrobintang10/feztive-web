@@ -10,6 +10,11 @@ import Register from "./views/Register";
 import ResetPassword from "./views/ResetPassword";
 import DashboardCatalog from "./views/DashboardCatalog";
 import ProtectedRoute from "./components/ProtectedRoute";
+import MerchandiseMenu from "./views/MerchandiseMenu";
+import MerchandiseDetail from "./views/MerchandiseDetail";
+import Cart from "./views/Cart";
+import Checkout from "./views/Checkout";
+import CompleteCheckout from "./views/CompleteCheckout";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +40,27 @@ const router = createBrowserRouter([
       {
         path: "/merchandise",
         element: <Merchandise />,
+      },
+      {
+        path: "/merchandise/menu",
+        element: <MerchandiseMenu />,
+      },
+      {
+        path: "/merchandise/menu/:merchandiseId",
+        element: <MerchandiseDetail />,
+      },
+      {
+        path: "/my-account/cart",
+        element: <Cart />,
+      },
+      {
+        path: "/my-account/checkout",
+        element: <Checkout />,
+      },
+      ,
+      {
+        path: "/my-account/checkout/complete",
+        element: <CompleteCheckout />,
       },
       {
         path: "/dashboard-catalog",

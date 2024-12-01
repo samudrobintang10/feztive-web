@@ -18,6 +18,7 @@ function Button({
   isWhite,
   isBlue,
   isSmall,
+  isMedium,
   isBig,
   isGradient,
   icon,
@@ -37,11 +38,18 @@ function Button({
     canvas.push("py-4 px-8 w-full");
     font.push("lg:text-xl text-xs");
     // implement on further progress
+  } else if (isMedium) {
+    canvas.push("py-4 px-8 w-full");
+    font.push("text-sm");
   } else {
     canvas.push("py-4 px-8");
     font.push("lg:text-lg text-xs");
   }
 
+  if (isDisabled) {
+    brush.push("bg-primary-grey");
+    font.push("text-white");
+  } 
   // Button type with extended on color
   if (isSecondary) {
     brush.push("outline outline-1");
@@ -55,10 +63,6 @@ function Button({
       brush.push("outline-primary-music-jazz");
       font.push("text-primary-music-jazz");
     }
-  }
-  if (isDisabled) {
-    brush.push("bg-primary-grey");
-    font.push("text-white");
   } else {
     // The filled button is always has white color font
     font.push("text-primary-white");

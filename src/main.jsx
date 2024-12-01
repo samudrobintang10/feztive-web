@@ -6,14 +6,17 @@ import { RouterProvider } from "react-router-dom";
 import { ContextProvider } from "./contexts/ContextProvider.jsx";
 import Toast from "./elements/Toast.jsx";
 import { ToastProvider } from "./contexts/ToastContext.jsx";
+import { ThemeProvider } from "@material-tailwind/react";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ContextProvider>
-      <ToastProvider>
-        <RouterProvider router={router} />
-        <Toast />
-      </ToastProvider>
-    </ContextProvider>
+    <ThemeProvider>
+      <ContextProvider>
+        <ToastProvider>
+          <RouterProvider router={router} />
+          <Toast />
+        </ToastProvider>
+      </ContextProvider>
+    </ThemeProvider>
   </React.StrictMode>
 );

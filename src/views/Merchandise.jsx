@@ -24,7 +24,7 @@ function Merchandise() {
       <div className="grid gap-y-9 py-24">
         <div className="merchandise-menu">
           <h2 className=" font-semibold text-primary-music-jazz pb-5">
-            Merchandise Menu
+            Merchandise
           </h2>
           <div className="flex gap-x-4">
             <MerchandiseMenuCard
