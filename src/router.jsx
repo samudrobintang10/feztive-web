@@ -15,6 +15,7 @@ import MerchandiseDetail from "./views/MerchandiseDetail";
 import Cart from "./views/Cart";
 import Checkout from "./views/Checkout";
 import CompleteCheckout from "./views/CompleteCheckout";
+import OrderHistory from "./views/OrderHistory";
 
 const router = createBrowserRouter([
   {
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
       {
         path: "/my-account/checkout/complete",
         element: <CompleteCheckout />,
+      },
+      {
+        path: "/my-account/order-history",
+        element: <OrderHistory />,
       },
       {
         path: "/dashboard-catalog",

@@ -15,6 +15,7 @@ function Button({
   isSecondary,
   isPurple,
   isOrange,
+  isRed,
   isWhite,
   isBlue,
   isSmall,
@@ -49,7 +50,7 @@ function Button({
   if (isDisabled) {
     brush.push("bg-primary-grey");
     font.push("text-white");
-  } 
+  }
   // Button type with extended on color
   if (isSecondary) {
     brush.push("outline outline-1");
@@ -70,6 +71,8 @@ function Button({
       brush.push("bg-primary-purple");
     } else if (isOrange) {
       brush.push("bg-primary-orange");
+    } else if (isRed) {
+      brush.push("bg-primary-red");
     } else if (isBlue) brush.push("bg-tertiary-blue");
     else {
       if (isGradient) {
