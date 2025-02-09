@@ -1,0 +1,13 @@
+[
+    {
+      "datetime": "2025-01-05T14:22:00",
+      "status": "PICKUP-COURIER",
+      "description": "Waiting for courier pickup"
+    },
+    {
+      "datetime": "2025-01-06T20:20:00",
+      "status": "PICKUP-BRANCH",
+      "description": "Waiting for pickup on branch expedition"
+    }
+  ]
+  

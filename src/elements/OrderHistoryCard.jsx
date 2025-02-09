@@ -6,6 +6,7 @@ import { Modal, Box, Typography } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import SelectBox from "./SelectBox";
+import Tracker from "../assets/json/tracker.json";
 
 function OrderHistoryCard({
   image,
@@ -140,7 +141,6 @@ function OrderHistoryCard({
                   </div>
                 </div>
               </div>
-
               <SelectBox
                 placeholder={"Why are you cancelling this product?"}
                 isSmall
@@ -184,6 +184,31 @@ function OrderHistoryCard({
                     <h5 className="text-tertiary-grey">1 x Rp250.000</h5>
                   </div>
                 </div>
+              </div>
+              <div className="track-order grid gap-y-4">
+                <h4 className="font-inter text-sm font-medium">Current status</h4>
+                {Tracker.map((track, index) => {
+                  const formattedDate = new Date(track.datetime).toLocaleString("en-GB", { 
+                    hour: "2-digit", 
+                    minute: "2-digit" 
+                  }) + ", " + new Date(track.datetime).toLocaleString("en-GB", { 
+                    day: "2-digit", 
+                    month: "short" 
+                  });
+
+                  const isLast = index === Tracker.length - 1;
+
+                  return (
+                    <div className="flex gap-x-6">
+                      <h4 className={`font-inter text-sm ${isLast ? "text-black" : "text-tertiary-grey"}`}>
+                        {formattedDate}
+                      </h4>
+                      <h4 className={`font-inter text-sm ${isLast ? "text-primary-purple font-semibold" : "text-tertiary-grey"}`}>
+                        {track.description}
+                      </h4>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
