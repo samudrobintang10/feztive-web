@@ -65,22 +65,32 @@ function Button({
       font.push("text-primary-music-jazz");
     }
   } else {
-    // The filled button is always has white color font
-    font.push("text-primary-white");
     if (isPurple) {
       brush.push("bg-primary-purple");
+      font.push("text-primary-white");
     } else if (isOrange) {
       brush.push("bg-primary-orange");
+      font.push("text-primary-white");
     } else if (isRed) {
       brush.push("bg-primary-red");
-    } else if (isBlue) brush.push("bg-tertiary-blue");
-    else {
+      font.push("text-primary-white");
+    } else if (isBlue) {
+      brush.push("bg-tertiary-blue");
+      font.push("text-primary-white");
+    }
+    else if (isWhite) {
+      brush.push("bg-primary-white");
+      font.push("text-primary-black");
+    }
+    else { 
       if (isGradient) {
         brush.push(
           "bg-gradient-to-r from-primary-music-jazz to-primary-light-orange"
         );
+        font.push("text-primary-white");
       } else {
         brush.push("bg-primary-music-jazz");
+        font.push("text-primary-white");
       }
     }
   }
