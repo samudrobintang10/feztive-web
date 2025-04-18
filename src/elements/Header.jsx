@@ -1,168 +1,221 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faAngleDown,
+  faSignOut,
+  faBars,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import { Divider } from "@mui/material";
+
+// Components & Assets
 import NavTab from "./NavTab";
 import Button from "./Button";
-import { useState } from "react";
-
-// Imported Png or Svg
 import FeztiveMiniLogoSvg from "../assets/svg/feztive-mini.svg";
 import BoxOnePng from "../assets/images/box1.png";
 import BoxTwoPng from "../assets/images/box2.png";
 import CupOnePng from "../assets/images/cup1.png";
 import CubeOnePng from "../assets/images/cube1.png";
-import {
-  faAngleDown,
-  faSignIn,
-  faSignOut,
-} from "@fortawesome/free-solid-svg-icons";
-
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import { Divider } from "@mui/material";
 
 function Header({ onOpenPage, page, token, onLogout }) {
-  const brush = [];
-  const pageSecondary = ["/event", "/merchandise"];
-  if (page === "/merchandise") {
-    brush.length = 0;
-    brush.push("bg-gradient-to-r from-secondary-purple to-primary-purple");
-  }
-  if (page === "/event") {
-    brush.length = 0;
-    brush.push("bg-gradient-to-r from-primary-blue to-secondary-blue");
-  }
-
-  // Set on dropdown navbar
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  const handleClick = (event) => setAnchorEl(event.currentTarget);
+  const handleClose = () => setAnchorEl(null);
+
+  const pageSecondary = ["/event", "/merchandise"];
+  const isSecondary = pageSecondary.includes(page);
+  const brush = isSecondary
+    ? page === "/merchandise"
+      ? "bg-gradient-to-r from-secondary-purple to-primary-purple"
+      : "bg-gradient-to-r from-primary-blue to-secondary-blue"
+    : "";
 
   return (
-    <header className={"header relative z-0".concat(" ", brush.join(" "))}>
-      <div className="wrapper-header flex justify-between py-3 z-20">
+    <header className={`header relative z-50 ${brush}`}>
+      {/* Top Navigation */}
+      <div className="wrapper-header flex justify-between py-3 z-20 px-4 lg:px-16">
         <div className="flex gap-3 items-center">
           <img
             src={FeztiveMiniLogoSvg}
-            alt="Your SVG"
-            className="bg-primary-white rounded-full justify-self-center"
+            alt="Logo"
+            className="bg-primary-white rounded-full w-10 h-10"
           />
           <h2
-            className={"lg:text-2xl text-base font-monserrat font-bold".concat(
-              " ",
-              pageSecondary.includes(page)
-                ? "text-white"
-                : "text-primary-music-jazz"
-            )}
+            className={`lg:text-2xl text-base font-monserrat font-bold ${
+              isSecondary ? "text-white" : "text-primary-music-jazz"
+            }`}
           >
             Feztive
           </h2>
         </div>
+
+        {/* Desktop Nav */}
         <div className="gap-8 items-center hidden lg:flex">
           <NavTab
             placeholder="Home"
-            href={"/"}
+            href="/"
             onClick={() => onOpenPage("/")}
-            isSecondary={pageSecondary.includes(page)}
+            isSecondary={isSecondary}
           />
           <NavTab
             placeholder="About"
-            href={"/about"}
+            href="/about"
             onClick={() => onOpenPage("/about")}
-            isSecondary={pageSecondary.includes(page)}
+            isSecondary={isSecondary}
           />
           <NavTab
             placeholder="Event"
-            href={"/event"}
+            href="/event"
             onClick={() => onOpenPage("/event")}
-            isSecondary={pageSecondary.includes(page)}
+            isSecondary={isSecondary}
           />
           <NavTab
             placeholder="Merchandise"
-            href={"/merchandise"}
+            href="/merchandise"
             onClick={() => onOpenPage("/merchandise")}
-            isSecondary={pageSecondary.includes(page)}
+            isSecondary={isSecondary}
           />
           {token && (
-            <div className="vertical-line border-l-2 h-1/2 border-l-black"></div>
-          )}
-          {token && (
-            <div className="dropdown hover:cursor-pointer">
-              <div className="flex items-center gap-x-4" onClick={handleClick}>
-                <h5
-                  className={(pageSecondary.includes(page)
-                    ? "text-white"
-                    : "text-black"
-                  ).concat(" ", "hover:text-primary-orange")}
+            <>
+              <div className="vertical-line border-l-2 h-1/2 border-l-black"></div>
+              <div className="dropdown hover:cursor-pointer">
+                <div
+                  className="flex items-center gap-x-4"
+                  onClick={handleClick}
                 >
-                  My Account
-                </h5>
-                <FontAwesomeIcon
-                  icon={faAngleDown}
-                  className={
-                    pageSecondary.includes(page) ? "text-white" : "text-black"
-                  }
-                />
-              </div>
-              <Menu
-                anchorEl={anchorEl}
-                id="account-menu"
-                open={open}
-                onClose={handleClose}
-                onClick={handleClose}
-                PaperProps={{
-                  elevation: 0,
-                  sx: {
-                    overflow: "visible",
-                    mt: 1.5,
-                    "& .MuiAvatar-root": {
-                      width: 32,
-                      height: 32,
-                      ml: -0.5,
-                      mr: 1,
-                    },
-                    border: 1,
-                    borderColor: "#D8D8D8",
-                  },
-                }}
-                transformOrigin={{ horizontal: "right", vertical: "top" }}
-                anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-              >
-                <MenuItem>
-                  <NavTab
-                    placeholder="Profile"
-                    href={"/profile"}
-                    onClick={() => onOpenPage("/profile")}
-                  />
-                </MenuItem>
-                <MenuItem>
-                  <NavTab
-                    placeholder="Dashboard Catalog"
-                    href={"/dashboard-catalog"}
-                    onClick={() => onOpenPage("/dashboard-catalog")}
-                  />
-                </MenuItem>
-                <Divider component="li" />
-                <MenuItem onClick={onLogout} sx={{ columnGap: 1 }}>
+                  <h5
+                    className={`${
+                      isSecondary ? "text-white" : "text-black"
+                    } hover:text-primary-orange`}
+                  >
+                    My Account
+                  </h5>
                   <FontAwesomeIcon
-                    icon={faSignOut}
-                    className="text-primary-red"
-                    style={{ transform: "rotate(180deg)" }}
+                    icon={faAngleDown}
+                    className={isSecondary ? "text-white" : "text-black"}
                   />
-                  <h5 className={"text-primary-red"}>Logout</h5>
-                </MenuItem>
-              </Menu>
-            </div>
+                </div>
+                <Menu
+                  anchorEl={anchorEl}
+                  id="account-menu"
+                  open={open}
+                  onClose={handleClose}
+                  onClick={handleClose}
+                  PaperProps={{
+                    elevation: 0,
+                    sx: {
+                      overflow: "visible",
+                      mt: 1.5,
+                      border: 1,
+                      borderColor: "#D8D8D8",
+                    },
+                  }}
+                  transformOrigin={{ horizontal: "right", vertical: "top" }}
+                  anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+                >
+                  <MenuItem>
+                    <NavTab
+                      placeholder="Profile"
+                      href="/profile"
+                      onClick={() => onOpenPage("/profile")}
+                    />
+                  </MenuItem>
+                  <MenuItem>
+                    <NavTab
+                      placeholder="Dashboard Catalog"
+                      href="/dashboard-catalog"
+                      onClick={() => onOpenPage("/dashboard-catalog")}
+                    />
+                  </MenuItem>
+                  <Divider component="li" />
+                  <MenuItem onClick={onLogout} sx={{ columnGap: 1 }}>
+                    <FontAwesomeIcon
+                      icon={faSignOut}
+                      className="text-primary-red"
+                      style={{ transform: "rotate(180deg)" }}
+                    />
+                    <h5 className="text-primary-red">Logout</h5>
+                  </MenuItem>
+                </Menu>
+              </div>
+            </>
           )}
           {!token && (
-            <Button placeholder="Login" isSmall isSecondary href={"/login"} />
+            <Button placeholder="Login" isSmall isSecondary href="/login" />
+          )}
+        </div>
+
+        {/* Burger button */}
+        <div className="lg:hidden flex items-center">
+          <FontAwesomeIcon
+            icon={faBars}
+            className="text-black text-xl cursor-pointer"
+            onClick={() => setSidebarOpen(true)}
+          />
+        </div>
+      </div>
+
+      {/* Mobile Sidebar */}
+      <div
+        className={`fixed top-0 left-0 h-screen w-full bg-primary-orange z-50 transition-transform duration-300 ease-in-out ${
+          sidebarOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        <div className="flex flex-col items-center py-14 h-full gap-8">
+          <FontAwesomeIcon
+            icon={faXmark}
+            className="text-white text-2xl "
+            onClick={() => setSidebarOpen(false)}
+          />
+          <Link
+            to="/"
+            onClick={() => {
+              setSidebarOpen(false);
+              onOpenPage("/");
+            }}
+          >
+            <h4 className="text-white">Home</h4>
+          </Link>
+          <Link
+            to="/about"
+            onClick={() => {
+              setSidebarOpen(false);
+              onOpenPage("/about");
+            }}
+          >
+            <h4 className="text-white">About</h4>
+          </Link>
+          <Link
+            to="/merchandise"
+            onClick={() => {
+              setSidebarOpen(false);
+              onOpenPage("/merchandise");
+            }}
+          >
+            <h4 className="text-white">Merchandise</h4>
+          </Link>
+          {!token && (
+            <Link
+              to="/login"
+              onClick={() => {
+                setSidebarOpen(false);
+                onOpenPage("/login");
+              }}
+            >
+              <button className="text-white border border-white px-6 py-2 rounded">
+                LOGIN
+              </button>
+            </Link>
           )}
         </div>
       </div>
+
+      {/* Hero Section */}
       {page === "/merchandise" && (
         <div className="flex justify-center py-40">
           <div className="w-7/12 relative flex justify-center">
@@ -176,12 +229,13 @@ function Header({ onOpenPage, page, token, onLogout }) {
             />
             <img
               src={BoxTwoPng}
-              alt="box1.svg"
+              alt="box2.svg"
               className="w-[157px] h-[157px] absolute -bottom-10 right-10 z-0"
             />
           </div>
         </div>
       )}
+
       {page === "/event" && (
         <div className="flex justify-center py-32">
           <div className="w-7/12 relative flex justify-center">
@@ -190,12 +244,12 @@ function Header({ onOpenPage, page, token, onLogout }) {
             </h2>
             <img
               src={CupOnePng}
-              alt="box1.svg"
+              alt="cup1.svg"
               className="w-[165px] h-[165px] absolute -top-10 left-0 z-0"
             />
             <img
               src={CubeOnePng}
-              alt="box1.svg"
+              alt="cube1.svg"
               className="w-[195px] h-[195px] absolute -bottom-0 right-10 z-0"
             />
           </div>

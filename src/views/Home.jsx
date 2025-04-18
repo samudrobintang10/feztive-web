@@ -45,7 +45,7 @@ function CustomTabPanel(props) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+      {value === index && <Box sx={{ p: { xs: 0, lg: 3 } }}>{children}</Box>}
     </div>
   );
 }
@@ -66,16 +66,16 @@ function Home() {
   return (
     <div className="home">
       <section className="hero">
-        <div className="py-24 flex justify-between gap-20 items-center">
-          <div className="hero-images w-6/12 relative">
+        <div className="py-6 lg:py-24 flex lg:justify-between gap-6 lg:gap-20 items-center flex-col-reverse lg:flex-row">
+          <div className="hero-images lg:w-6/12 relative">
             <img
               src={HeroPng}
               alt="hero.png"
               className="rounded-3xl overflow-hidden"
             />
           </div>
-          <div className="hero-narative w-6/12 relative">
-            <h1 className="font-inter font-bold text-[56px] leading-tight pb-3">
+          <div className="hero-narative lg:w-6/12 relative">
+            <h1 className="font-inter font-bold text-2xl text-center lg:text-start lg:text-[56px] leading-tight pb-3">
               Elevating Merchandise Experiences for All with Feztive
             </h1>
           </div>
@@ -104,7 +104,10 @@ function Home() {
                     color: "#8000FF",
                   },
                   fontFamily: "inherit",
-                  fontSize: 20,
+                  fontSize: {
+                    xs: 14,
+                    lg: 20,
+                  },
                 }}
                 {...a11yProps(0)}
               />
@@ -117,23 +120,26 @@ function Home() {
                     color: "#FF8A00",
                   },
                   fontFamily: "inherit",
-                  fontSize: 20,
+                  fontSize: {
+                    xs: 14,
+                    lg: 20,
+                  },
                 }}
                 {...a11yProps(1)}
               />
             </Tabs>
           </Box>
           <CustomTabPanel value={value} index={0}>
-            <div className="py-8 flex justify-between gap-12">
-              <div className="hero-images w-5/12 relative">
+            <div className="lg:py-8 py-12 grid lg:flex justify-between gap-12">
+              <div className="hero-images lg:w-5/12 relative">
                 <img
                   src={BecomeASeller}
                   alt="becomeaseller.png"
                   className="rounded-3xl overflow-hidden"
                 />
               </div>
-              <div className="hero-narative w-7/12 relative">
-                <h3 className="font-inter font-semibold leading-tight pb-6">
+              <div className="hero-narative lg:w-7/12 relative">
+                <h3 className="font-inter font-semibold leading-tight pb-6 text-base">
                   Embrace flexible selling joyfully on our platform, whether
                   sharing or full pre-orders effortlessly!
                 </h3>
@@ -143,10 +149,10 @@ function Home() {
                       <FontAwesomeIcon icon={faLaptop} />
                     </div>
                     <div className="explain grid gap-y-2">
-                      <h4 className="font-semibold text-primary-purple">
+                      <h4 className="font-semibold text-primary-purple lg:text-base text-sm">
                         Dashboard to Manage
                       </h4>
-                      <h5 className="font-medium text-quinary-grey">
+                      <h5 className="font-medium text-quinary-grey lg:text-sm text-xs">
                         Dashboard to Manage
                       </h5>
                     </div>
@@ -156,10 +162,10 @@ function Home() {
                       <FontAwesomeIcon icon={faShop} />
                     </div>
                     <div className="explain grid gap-y-2">
-                      <h4 className="font-semibold text-primary-purple">
+                      <h4 className="font-semibold text-primary-purple lg:text-base text-sm">
                         Sell as sharing pre-orders
                       </h4>
-                      <h5 className="font-medium text-quinary-grey">
+                      <h5 className="font-medium text-quinary-grey lg:text-sm text-xs">
                         Dashboard to Manage
                       </h5>
                     </div>
@@ -169,10 +175,10 @@ function Home() {
                       <FontAwesomeIcon icon={faStar} />
                     </div>
                     <div className="explain grid gap-y-2">
-                      <h4 className="font-semibold text-primary-purple">
+                      <h4 className="font-semibold text-primary-purple lg:text-base text-sm">
                         Sell as full pre-orders
                       </h4>
-                      <h5 className="font-medium text-quinary-grey">
+                      <h5 className="font-medium text-quinary-grey lg:text-sm text-xs">
                         Dashboard to Manage
                       </h5>
                     </div>
@@ -182,29 +188,29 @@ function Home() {
             </div>
           </CustomTabPanel>
           <CustomTabPanel value={value} index={1}>
-            <div className="py-8 flex justify-between gap-12">
-              <div className="hero-images w-5/12 relative">
+            <div className="lg:py-8 py-12 grid lg:flex justify-between gap-12">
+              <div className="hero-images lg:w-5/12 relative">
                 <img
                   src={BecomeABuyer}
                   alt="becomeabuyer.png"
                   className="rounded-3xl overflow-hidden"
                 />
               </div>
-              <div className="hero-narative w-7/12 relative">
-                <h3 className="font-inter font-semibold leading-tight pb-6">
+              <div className="hero-narative lg:w-7/12 relative">
+                <h3 className="font-inter font-semibold leading-tight pb-6 text-base">
                   Embrace the ease where buying meets flexibility, only at
                   Feztive!
                 </h3>
                 <div className="grid gap-y-6">
                   <div className="flex gap-x-4 items-center">
-                    <div className="icon p-3 bg-secondary-orange  rounded-lg h-fit">
+                    <div className="icon p-4 bg-secondary-orange rounded-lg h-fit">
                       <FontAwesomeIcon icon={faPaypal} />
                     </div>
                     <div className="explain grid gap-y-2">
-                      <h4 className="font-semibold text-primary-orange">
+                      <h4 className="font-semibold text-primary-orange lg:text-base text-sm">
                         Flexible payment method
                       </h4>
-                      <h5 className="font-medium text-quinary-grey">
+                      <h5 className="font-medium text-quinary-grey lg:text-sm text-xs">
                         Dashboard to Manage
                       </h5>
                     </div>
@@ -214,10 +220,10 @@ function Home() {
                       <FontAwesomeIcon icon={faShop} />
                     </div>
                     <div className="explain grid gap-y-2">
-                      <h4 className="font-semibold text-primary-orange">
+                      <h4 className="font-semibold text-primary-orange lg:text-base text-sm">
                         Buy merchandise by sharing with others
                       </h4>
-                      <h5 className="font-medium text-quinary-grey">
+                      <h5 className="font-medium text-quinary-grey lg:text-sm text-xs">
                         Dashboard to Manage
                       </h5>
                     </div>
@@ -227,10 +233,10 @@ function Home() {
                       <FontAwesomeIcon icon={faStar} />
                     </div>
                     <div className="explain grid gap-y-2">
-                      <h4 className="font-semibold text-primary-orange">
+                      <h4 className="font-semibold text-primary-orange lg:text-base text-sm">
                         Solely buy merchandise for you
                       </h4>
-                      <h5 className="font-medium text-quinary-grey">
+                      <h5 className="font-medium text-quinary-grey lg:text-sm text-xs">
                         Dashboard to Manage
                       </h5>
                     </div>
@@ -241,9 +247,9 @@ function Home() {
           </CustomTabPanel>
         </Box>
       </section>
-      <section className="get-to-know my-36">
+      <section className="get-to-know lg:my-36 my-12">
         <div className="py-12 bg-primary-purple rounded-2xl flex justify-center">
-          <div className="w-1/3 mx-auto text-center grid gap-y-6">
+          <div className="px-5 lg:px-72 mx-auto text-center grid gap-y-6">
             <h4 className="text-white font-semibold">
               Have something you wanna ask? Hit us on this link below
             </h4>
